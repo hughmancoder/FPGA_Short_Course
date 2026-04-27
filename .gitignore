@@ -1,0 +1,40 @@
+# --- Vivado Project Folders ---
+*.runs/
+*.srcs/utils_1/
+*.gen/
+*.cache/
+*.hw/
+*.ip_user_files/
+*.sim/
+
+# --- Vivado Log/Journal Files (The messy ones) ---
+vivado*.log
+vivado*.jou
+vivado_pid*.str
+fsm_encoding.data
+
+# --- Compilation/Output Artifacts ---
+*.bit
+*.bin
+*.xsa
+*.mcs
+*.prm
+*.jou
+*.log
+*.pb
+*.str
+
+# --- Simulation Artifacts ---
+xsim.dir/
+*.wdb
+*.vcd
+*.sh
+*.bat
+
+# --- OS/Editor specific ---
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+Notes/
