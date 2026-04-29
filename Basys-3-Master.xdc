@@ -154,3 +154,36 @@ set_property -dict {PACKAGE_PIN L1 IOSTANDARD LVCMOS33} [get_ports {o_led[15]}]
 
 
 
+
+
+connect_debug_port u_ila_0/probe0 [get_nets [list {w_noise[0]} {w_noise[1]} {w_noise[2]} {w_noise[3]} {w_noise[4]} {w_noise[5]} {w_noise[6]} {w_noise[7]}]]
+
+connect_debug_port u_ila_0/probe0 [get_nets [list {w_adc[0]} {w_adc[1]} {w_adc[2]} {w_adc[3]} {w_adc[4]} {w_adc[5]} {w_adc[6]} {w_adc[7]} {w_adc[8]} {w_adc[9]} {w_adc[10]} {w_adc[11]} {w_adc[12]} {w_adc[13]} {w_adc[14]} {w_adc[15]}]]
+
+
+create_debug_core u_ila_0 ila
+set_property ALL_PROBE_SAME_MU true [get_debug_cores u_ila_0]
+set_property ALL_PROBE_SAME_MU_CNT 1 [get_debug_cores u_ila_0]
+set_property C_ADV_TRIGGER false [get_debug_cores u_ila_0]
+set_property C_DATA_DEPTH 1024 [get_debug_cores u_ila_0]
+set_property C_EN_STRG_QUAL false [get_debug_cores u_ila_0]
+set_property C_INPUT_PIPE_STAGES 2 [get_debug_cores u_ila_0]
+set_property C_TRIGIN_EN false [get_debug_cores u_ila_0]
+set_property C_TRIGOUT_EN false [get_debug_cores u_ila_0]
+set_property port_width 1 [get_debug_ports u_ila_0/clk]
+connect_debug_port u_ila_0/clk [get_nets [list i_clk_IBUF_BUFG]]
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe0]
+set_property port_width 16 [get_debug_ports u_ila_0/probe0]
+connect_debug_port u_ila_0/probe0 [get_nets [list {w_rom_rand[0]} {w_rom_rand[1]} {w_rom_rand[2]} {w_rom_rand[3]} {w_rom_rand[4]} {w_rom_rand[5]} {w_rom_rand[6]} {w_rom_rand[7]} {w_rom_rand[8]} {w_rom_rand[9]} {w_rom_rand[10]} {w_rom_rand[11]} {w_rom_rand[12]} {w_rom_rand[13]} {w_rom_rand[14]} {w_rom_rand[15]}]]
+create_debug_port u_ila_0 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe1]
+set_property port_width 33 [get_debug_ports u_ila_0/probe1]
+connect_debug_port u_ila_0/probe1 [get_nets [list {w_cmult_i[0]} {w_cmult_i[1]} {w_cmult_i[2]} {w_cmult_i[3]} {w_cmult_i[4]} {w_cmult_i[5]} {w_cmult_i[6]} {w_cmult_i[7]} {w_cmult_i[8]} {w_cmult_i[9]} {w_cmult_i[10]} {w_cmult_i[11]} {w_cmult_i[12]} {w_cmult_i[13]} {w_cmult_i[14]} {w_cmult_i[15]} {w_cmult_i[16]} {w_cmult_i[17]} {w_cmult_i[18]} {w_cmult_i[19]} {w_cmult_i[20]} {w_cmult_i[21]} {w_cmult_i[22]} {w_cmult_i[23]} {w_cmult_i[24]} {w_cmult_i[25]} {w_cmult_i[26]} {w_cmult_i[27]} {w_cmult_i[28]} {w_cmult_i[29]} {w_cmult_i[30]} {w_cmult_i[31]} {w_cmult_i[32]}]]
+create_debug_port u_ila_0 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe2]
+set_property port_width 33 [get_debug_ports u_ila_0/probe2]
+connect_debug_port u_ila_0/probe2 [get_nets [list {w_cmult_q[0]} {w_cmult_q[1]} {w_cmult_q[2]} {w_cmult_q[3]} {w_cmult_q[4]} {w_cmult_q[5]} {w_cmult_q[6]} {w_cmult_q[7]} {w_cmult_q[8]} {w_cmult_q[9]} {w_cmult_q[10]} {w_cmult_q[11]} {w_cmult_q[12]} {w_cmult_q[13]} {w_cmult_q[14]} {w_cmult_q[15]} {w_cmult_q[16]} {w_cmult_q[17]} {w_cmult_q[18]} {w_cmult_q[19]} {w_cmult_q[20]} {w_cmult_q[21]} {w_cmult_q[22]} {w_cmult_q[23]} {w_cmult_q[24]} {w_cmult_q[25]} {w_cmult_q[26]} {w_cmult_q[27]} {w_cmult_q[28]} {w_cmult_q[29]} {w_cmult_q[30]} {w_cmult_q[31]} {w_cmult_q[32]}]]
+set_property C_CLK_INPUT_FREQ_HZ 300000000 [get_debug_cores dbg_hub]
+set_property C_ENABLE_CLK_DIVIDER false [get_debug_cores dbg_hub]
+set_property C_USER_SCAN_CHAIN 1 [get_debug_cores dbg_hub]
+connect_debug_port dbg_hub/clk [get_nets i_clk_IBUF_BUFG]

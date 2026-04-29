@@ -49,7 +49,7 @@ begin
         end if;
     end process;
     
-    -- led outputa
+    -- led output
     process(i_clk, i_rst)
     begin
         if(i_rst = '1') then

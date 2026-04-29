@@ -1,86 +1,87 @@
 library IEEE;
-    use IEEE.STD_LOGIC_1164.ALL;
-    use IEEE.NUMERIC_STD.ALL;
+use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.NUMERIC_STD.ALL;
 library STD;
-    use STD.TEXTIO.ALL;
+use STD.TEXTIO.ALL;
 
-entity tb_accum is
-end tb_accum;
+entity tb_mult is
+end tb_mult;
 
-architecture behavioural of tb_accum is
+architecture behavioural of tb_mult is
 
-    constant k_width_din : integer := 16;
-    constant k_width_acc : integer := 48;
-    
-    signal i_clk   : std_logic := '1';
-    signal i_en    : std_logic := '0';
-    signal i_data  : std_logic_vector(k_width_din-1 downto 0) := (others => '0');
-    signal o_accum : std_logic_vector(k_width_acc-1 downto 0);
+    -- Constants for bit widths
+    constant k_nbits : integer := 16;
+
+    -- Signals
+    signal i_clk    : std_logic := '1';
+    signal i_mult_a : std_logic_vector(k_nbits-1 downto 0) := (others => '0');
+    signal i_mult_b : std_logic_vector(k_nbits-1 downto 0) := (others => '0');
+    signal o_mult_c : std_logic_vector(2*k_nbits-1 downto 0);
 
 begin
+
+    -- Clock Generation: 100MHz
     i_clk <= not i_clk after 5 ns;
     
-    u_accum: entity work.accum
+     u_mult: entity work.mult
     generic map
     (
-       g_width_din => k_width_din,
-       g_width_acc => k_width_acc
+        g_nbits  => k_nbits
     )
     port map
     (
-        i_clk   => i_clk,
-        i_en    => i_en,
-        i_data  => i_data,
-        o_accum => o_accum
+        i_clk    => i_clk,
+        i_mult_a => i_mult_a,
+        i_mult_b => i_mult_b,
+        o_mult_c => o_mult_c
     );
-    
 
-process
-    file infile      : text open read_mode
-                       is "C:\Users\a1829716\FPGA_Short_Course\Matlab\accum_input.txt";
-    variable v_line  : line;
-    variable v_data  : integer;
-begin
-    i_en <= '0';
-    wait until rising_edge(i_clk);
-    i_en <= '1';
     
-    while not endfile(infile) loop
-        readline(infile, v_line);
-        read(v_line, v_data);
-        i_data <= std_logic_vector(to_signed(v_data, k_width_din));
+    -- Process to read input data (A and B) from a text file
+    process
+        file infile      : text open read_mode is "C:\Users\a1829716\FPGA_Short_Course\Matlab\mult_input.txt";
+        variable v_line  : line;
+        variable v_a, v_b : integer;
+        variable v_space  : character; -- Used to skip the space between integers
+    begin
+        while not endfile(infile) loop
+            readline(infile, v_line);
+            read(v_line, v_a);
+            read(v_line, v_space); -- Consume the delimiter
+            read(v_line, v_b);
+            
+            i_mult_a <= std_logic_vector(to_signed(v_a, k_nbits));
+            i_mult_b <= std_logic_vector(to_signed(v_b, k_nbits));
+            wait until rising_edge(i_clk);
+        end loop;
+
+        wait; 
+    end process;
+
+    -- Process to read expected output data and verify
+    process
+        file outfile        : text open read_mode is "C:\Users\a1829716\FPGA_Short_Course\Matlab\mult_output.txt";
+        variable v_line     : line;
+        variable v_expected : integer;
+    begin
+        -- Adjust this delay based on your multiplier's pipeline depth
         wait until rising_edge(i_clk);
-    end loop;
-    
-    i_en <= '0';
-    wait;
-end process;
-
--- read expected output data from a text file and check it
-process
-    file infile      : text open read_mode
-                       is "C:\Users\a1829716\FPGA_Short_Course\Matlab\accum_output.txt";
-    variable v_line  : line;
-    variable v_expected  : integer;
-begin
-    -- two clock delay from input to output of accum
-    wait until rising_edge(i_clk);
-    wait until rising_edge(i_clk);
-    wait until rising_edge(i_clk);
-
-    -- loop through file checking all outputs
-    while not endfile(infile) loop
         wait until rising_edge(i_clk);
-        readline(infile, v_line);
-        read(v_line, v_expected);
-        assert v_expected = to_integer(signed(o_accum))
-            report "Did not match expected output" severity failure;
-    end loop;
-    
-    report "File simulation successful!" severity note;
-    wait;
-end process;
+
+        while not endfile(outfile) loop
+            readline(outfile, v_line);
+            read(v_line, v_expected);
+            
+            assert (to_integer(signed(o_mult_c)) = v_expected)
+                report "Output mismatch! Expected: " & integer'image(v_expected) & 
+                       " Got: " & integer'image(to_integer(signed(o_mult_c)))
+                severity failure;
+                
+            wait until rising_edge(i_clk);
+        end loop;
+
+        report "Simulation successful - all outputs matched.";
+        wait;
+    end process;
 
 end behavioural;
-
-  

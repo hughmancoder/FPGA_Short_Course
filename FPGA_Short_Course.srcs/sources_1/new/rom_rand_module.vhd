@@ -7,8 +7,8 @@ library work;
 entity rom_rand is
   generic
   (
-    g_nbits    : integer := 10;
-    g_width    : integer := 16
+    g_nbits    : integer := 10; -- address width 2^10 = 1024
+    g_width    : integer := 16 -- data width
   );
   port
   (
@@ -26,7 +26,7 @@ architecture behavioral of rom_rand is
 begin
 
   -- assign outputs
-  o_data <= f_data;
+  o_data <= f_data; -- concurrent assignment as its out of the process block
 
   -- read from the rom
   process(i_clk)
