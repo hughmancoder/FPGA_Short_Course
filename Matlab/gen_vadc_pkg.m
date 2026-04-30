@@ -1,4 +1,4 @@
-function gen_vadc_pkg_fn(rom_data)
+function gen_vadc_pkg(rom_data)
 
 rom_depth=length(rom_data);
 
@@ -17,6 +17,7 @@ fprintf(fid,"end package vadc_pkg;\n");
 
 end
 
+%{
 % 1. Setup parameters and generate the signal 'x'
 Fs=100e6;
 dt=1/Fs;
@@ -39,3 +40,4 @@ xlabel('F(MHz)');ylabel('Mag(dB)');
 
 
 gen_vadc_pkg_fn(x);
+%}
