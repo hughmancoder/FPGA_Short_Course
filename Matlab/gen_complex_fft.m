@@ -1,0 +1,13 @@
+clear;
+Fs=100e6;
+dt=1/Fs;
+N=1024;
+t=dt.*(0:N-1);
+Fc=20e6;
+x=exp(j*2*pi*Fc.*t);
+X=fft(x);
+Xmag_dB=20*log10(abs(X));
+f=linspace(-Fs/2/1e6,Fs/2/1e6,N);
+plot(f,fftshift(Xmag_dB));
+title('Complex Spectrum, Fs=100MHz, Fc=20MHz');
+xlabel('f(MHz)');ylabel('Mag(dB)');

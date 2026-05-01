@@ -169,6 +169,11 @@ connect_debug_port u_ila_0/probe2 [get_nets [list {w_cmult_q[0]} {w_cmult_q[1]} 
 connect_debug_port u_ila_0/probe3 [get_nets [list w_hilbert_valid]]
 
 
+connect_debug_port u_ila_0/probe0 [get_nets [list {w_hilbert_i[0]} {w_hilbert_i[1]} {w_hilbert_i[2]} {w_hilbert_i[3]} {w_hilbert_i[4]} {w_hilbert_i[5]} {w_hilbert_i[6]} {w_hilbert_i[7]} {w_hilbert_i[8]} {w_hilbert_i[9]} {w_hilbert_i[10]} {w_hilbert_i[11]} {w_hilbert_i[12]} {w_hilbert_i[13]} {w_hilbert_i[14]} {w_hilbert_i[15]}]]
+connect_debug_port u_ila_0/probe1 [get_nets [list {w_adc_data[0]} {w_adc_data[1]} {w_adc_data[2]} {w_adc_data[3]} {w_adc_data[4]} {w_adc_data[5]} {w_adc_data[6]} {w_adc_data[7]} {w_adc_data[8]} {w_adc_data[9]} {w_adc_data[10]} {w_adc_data[11]} {w_adc_data[12]} {w_adc_data[13]} {w_adc_data[14]} {w_adc_data[15]}]]
+connect_debug_port u_ila_0/probe2 [get_nets [list {w_hilbert_q[0]} {w_hilbert_q[1]} {w_hilbert_q[2]} {w_hilbert_q[3]} {w_hilbert_q[4]} {w_hilbert_q[5]} {w_hilbert_q[6]} {w_hilbert_q[7]} {w_hilbert_q[8]} {w_hilbert_q[9]} {w_hilbert_q[10]} {w_hilbert_q[11]} {w_hilbert_q[12]} {w_hilbert_q[13]} {w_hilbert_q[14]} {w_hilbert_q[15]}]]
+
+
 create_debug_core u_ila_0 ila
 set_property ALL_PROBE_SAME_MU true [get_debug_cores u_ila_0]
 set_property ALL_PROBE_SAME_MU_CNT 1 [get_debug_cores u_ila_0]
@@ -182,15 +187,23 @@ set_property port_width 1 [get_debug_ports u_ila_0/clk]
 connect_debug_port u_ila_0/clk [get_nets [list i_clk_IBUF_BUFG]]
 set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe0]
 set_property port_width 16 [get_debug_ports u_ila_0/probe0]
-connect_debug_port u_ila_0/probe0 [get_nets [list {w_hilbert_i[0]} {w_hilbert_i[1]} {w_hilbert_i[2]} {w_hilbert_i[3]} {w_hilbert_i[4]} {w_hilbert_i[5]} {w_hilbert_i[6]} {w_hilbert_i[7]} {w_hilbert_i[8]} {w_hilbert_i[9]} {w_hilbert_i[10]} {w_hilbert_i[11]} {w_hilbert_i[12]} {w_hilbert_i[13]} {w_hilbert_i[14]} {w_hilbert_i[15]}]]
+connect_debug_port u_ila_0/probe0 [get_nets [list {w_adc[0]} {w_adc[1]} {w_adc[2]} {w_adc[3]} {w_adc[4]} {w_adc[5]} {w_adc[6]} {w_adc[7]} {w_adc[8]} {w_adc[9]} {w_adc[10]} {w_adc[11]} {w_adc[12]} {w_adc[13]} {w_adc[14]} {w_adc[15]}]]
 create_debug_port u_ila_0 probe
 set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe1]
-set_property port_width 16 [get_debug_ports u_ila_0/probe1]
-connect_debug_port u_ila_0/probe1 [get_nets [list {w_adc_data[0]} {w_adc_data[1]} {w_adc_data[2]} {w_adc_data[3]} {w_adc_data[4]} {w_adc_data[5]} {w_adc_data[6]} {w_adc_data[7]} {w_adc_data[8]} {w_adc_data[9]} {w_adc_data[10]} {w_adc_data[11]} {w_adc_data[12]} {w_adc_data[13]} {w_adc_data[14]} {w_adc_data[15]}]]
+set_property port_width 27 [get_debug_ports u_ila_0/probe1]
+connect_debug_port u_ila_0/probe1 [get_nets [list {w_fft_data_q[0]} {w_fft_data_q[1]} {w_fft_data_q[2]} {w_fft_data_q[3]} {w_fft_data_q[4]} {w_fft_data_q[5]} {w_fft_data_q[6]} {w_fft_data_q[7]} {w_fft_data_q[8]} {w_fft_data_q[9]} {w_fft_data_q[10]} {w_fft_data_q[11]} {w_fft_data_q[12]} {w_fft_data_q[13]} {w_fft_data_q[14]} {w_fft_data_q[15]} {w_fft_data_q[16]} {w_fft_data_q[17]} {w_fft_data_q[18]} {w_fft_data_q[19]} {w_fft_data_q[20]} {w_fft_data_q[21]} {w_fft_data_q[22]} {w_fft_data_q[23]} {w_fft_data_q[24]} {w_fft_data_q[25]} {w_fft_data_q[26]}]]
 create_debug_port u_ila_0 probe
 set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe2]
-set_property port_width 16 [get_debug_ports u_ila_0/probe2]
-connect_debug_port u_ila_0/probe2 [get_nets [list {w_hilbert_q[0]} {w_hilbert_q[1]} {w_hilbert_q[2]} {w_hilbert_q[3]} {w_hilbert_q[4]} {w_hilbert_q[5]} {w_hilbert_q[6]} {w_hilbert_q[7]} {w_hilbert_q[8]} {w_hilbert_q[9]} {w_hilbert_q[10]} {w_hilbert_q[11]} {w_hilbert_q[12]} {w_hilbert_q[13]} {w_hilbert_q[14]} {w_hilbert_q[15]}]]
+set_property port_width 27 [get_debug_ports u_ila_0/probe2]
+connect_debug_port u_ila_0/probe2 [get_nets [list {w_mag[0]} {w_mag[1]} {w_mag[2]} {w_mag[3]} {w_mag[4]} {w_mag[5]} {w_mag[6]} {w_mag[7]} {w_mag[8]} {w_mag[9]} {w_mag[10]} {w_mag[11]} {w_mag[12]} {w_mag[13]} {w_mag[14]} {w_mag[15]} {w_mag[16]} {w_mag[17]} {w_mag[18]} {w_mag[19]} {w_mag[20]} {w_mag[21]} {w_mag[22]} {w_mag[23]} {w_mag[24]} {w_mag[25]} {w_mag[26]}]]
+create_debug_port u_ila_0 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe3]
+set_property port_width 27 [get_debug_ports u_ila_0/probe3]
+connect_debug_port u_ila_0/probe3 [get_nets [list {w_fft_data_i[0]} {w_fft_data_i[1]} {w_fft_data_i[2]} {w_fft_data_i[3]} {w_fft_data_i[4]} {w_fft_data_i[5]} {w_fft_data_i[6]} {w_fft_data_i[7]} {w_fft_data_i[8]} {w_fft_data_i[9]} {w_fft_data_i[10]} {w_fft_data_i[11]} {w_fft_data_i[12]} {w_fft_data_i[13]} {w_fft_data_i[14]} {w_fft_data_i[15]} {w_fft_data_i[16]} {w_fft_data_i[17]} {w_fft_data_i[18]} {w_fft_data_i[19]} {w_fft_data_i[20]} {w_fft_data_i[21]} {w_fft_data_i[22]} {w_fft_data_i[23]} {w_fft_data_i[24]} {w_fft_data_i[25]} {w_fft_data_i[26]}]]
+create_debug_port u_ila_0 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe4]
+set_property port_width 1 [get_debug_ports u_ila_0/probe4]
+connect_debug_port u_ila_0/probe4 [get_nets [list w_fft_tlast_out]]
 set_property C_CLK_INPUT_FREQ_HZ 300000000 [get_debug_cores dbg_hub]
 set_property C_ENABLE_CLK_DIVIDER false [get_debug_cores dbg_hub]
 set_property C_USER_SCAN_CHAIN 1 [get_debug_cores dbg_hub]
